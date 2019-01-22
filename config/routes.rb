@@ -13,4 +13,8 @@ Rails.application.routes.draw do
     end
   end
   
+  resources :organizations do
+    get :join_org
+  end
+
 end

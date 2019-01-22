@@ -7,7 +7,7 @@
     <tr>
       <th>Name</th>
       <th>Description</th>
-      <th>User</th>
+      <th>Join</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,10 +17,7 @@
       <tr>
         <td><%= organization.name %></td>
         <td><%= organization.description %></td>
-        <td><%= organization.user %></td>
-        <td><%= link_to 'Show', organization %></td>
-        <td><%= link_to 'Edit', edit_organization_path(organization) %></td>
-        <td><%= link_to 'Destroy', organization, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Join', organization_join_org_path(organization) %></td>
       </tr>
     <% end %>
   </tbody>
