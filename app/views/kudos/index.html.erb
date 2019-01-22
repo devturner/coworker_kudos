@@ -3,11 +3,13 @@
 <h1>Kudos</h1> 
 
 <% @kudos_left = 3 - current_user.sender.where(created_at: Date.today.beginning_of_week...Date.today.end_of_week).count %>
-<% if @kudos_left > 0 %>
-  <h3> <%= @kudos_left %> Kudos left to give </h3>
-  <%= link_to 'Send a Kudos', new_kudo_path %>
-<% else %> 
-  <h3> Kudos reload weekly! </h3>
+<% if !current_user.organization_id.present? %> 
+  <h3> Join or create an organization above</h3>
+  <% elsif @kudos_left > 0 && current_user.organization_id.present? %>
+    <h3> <%= @kudos_left %> Kudos left to give </h3>
+    <%= link_to 'Send a Kudos', new_kudo_path %>
+  <% else %> 
+    <h3> Kudos reload weekly! </h3>
 <% end %>
 
 

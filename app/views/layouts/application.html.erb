@@ -5,23 +5,33 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <div id="container">
-      <div id="user_nav">
-      <%= link_to 'Kudos', kudos_path %>
-        <% if user_signed_in? %>
-          <% if current_user.organization_id.present? %>
-            User: <%= current_user.email %> | Team: <%= link_to Organization.find(current_user.organization_id).name, organizations_path  %> |
-            <% else %>
-              <%= current_user.email %> | <%= link_to 'Join or Create an Org', organizations_path %>|
-            <% end %>
-            <%= link_to "Sign Out", destroy_user_session_path %>
-          <% else%>      
-        <% end %>
-    <%= yield %>
+
+        <nav class="navbar navbar-expand-md navbar-default bg-light fixed-top">
+            <li class="navbar-brand" href="#"><%= link_to 'Kudos', kudos_path %> </li>
+          
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+              <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                  <% if current_user.organization_id.present? %>
+                      User: <%= current_user.email %> | Team: <%= link_to Organization.find(current_user.organization_id).name, organizations_path %> | 
+                  <% else %>
+                      <li class="nav-item active"> <%= current_user.email %> | <%= link_to 'Join or Create an Org', organizations_path %> | </li>
+                  <% end %>
+                      <li class="nav-item active"> <%= link_to "Sign Out", destroy_user_session_path %>  </li>
+                  </li>
+              </ul>
+            </div>
+          </nav>
+
+        <div class="container">
+            <%= yield %>
+        </div>
+
   </body>
 </html>
