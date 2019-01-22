@@ -24,11 +24,11 @@ class KudosController < ApplicationController
   # POST /kudos
   # POST /kudos.json
   def create
-    @kudo = Kudo.new(kudo_params)
+    @kudo = Kudo.new(kudo_params.merge(sender_id: current_user.id))
 
     respond_to do |format|
       if @kudo.save
-        format.html { redirect_to @kudo, notice: 'Kudo was successfully created.' }
+        format.html { redirect_to kudos_url, notice: 'Kudos was sent.' }
         format.json { render :show, status: :created, location: @kudo }
       else
         format.html { render :new }
