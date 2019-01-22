@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= form.label :receiver_id %>
-    <%= form.text_field :receiver_id %>
+    <%= form.collection_select :receiver_id, User.where.not(id: current_user).where(organization_id: current_user.organization_id), :id, :full_name %>
   </div>
 
   <div class="actions">

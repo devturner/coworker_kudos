@@ -24,7 +24,7 @@ class OrganizationsController < ApplicationController
   # POST /organizations
   # POST /organizations.json
   def create
-    @organization = Organization.new(organization_params)
+    @organization = Organization.new(organization_params.merge(user_id: current_user.id))
       if @organization.save
         create_and_join_org(@organization)
       else
