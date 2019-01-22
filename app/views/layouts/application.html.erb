@@ -12,9 +12,10 @@
   <body>
     <div id="container">
       <div id="user_nav">
+      <%= link_to 'Kudos', kudos_path %>
         <% if user_signed_in? %>
           <% if current_user.organization_id.present? %>
-            <%= current_user.email %> | <%= Organization.find(current_user.organization_id).name %> |
+            <%= current_user.email %> | <%= link_to Organization.find(current_user.organization_id).name, organizations_path  %> |
             <% else %>
               <%= current_user.email %> | <%= link_to 'Join or Create an Org', organizations_path %>|
             <% end %>

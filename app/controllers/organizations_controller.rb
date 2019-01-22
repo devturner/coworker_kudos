@@ -25,16 +25,14 @@ class OrganizationsController < ApplicationController
   # POST /organizations.json
   def create
     @organization = Organization.new(organization_params)
-
-    respond_to do |format|
       if @organization.save
-        format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
-        format.json { render :show, status: :created, location: @organization }
+        create_and_join_org(@organization)
       else
-        format.html { render :new }
-        format.json { render json: @organization.errors, status: :unprocessable_entity }
+        respond_to do |format|
+          format.html { render :new }
+          format.json { render json: @organization.errors, status: :unprocessable_entity }
+        end
       end
-    end
   end
 
   # PATCH/PUT /organizations/1
@@ -58,6 +56,25 @@ class OrganizationsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to organizations_url, notice: 'Organization was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def create_and_join_org(organization)
+    current_user.update_attribute(:organization_id, organization.id)
+
+    respond_to do |format|
+      format.html { redirect_to kudos_path, notice: 'Successfully created and joined that organization.' }
+      format.json { render :show, status: :created, location: @organization }
+    end
+  end
+
+  def join_org(organization=params[:organization_id])
+    @org = Organization.find(organization)
+    current_user.update_attribute(:organization_id, @org.id)
+
+    respond_to do |format|
+      format.html { redirect_to kudos_path, notice: 'You have joined that organization.' }
+      format.json { render :show, status: :created, location: @organization }
     end
   end
 
