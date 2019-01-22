@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @kudo.message %>
+</p>
+
+<p>
+  <strong>Sender:</strong>
+  <%= @kudo.sender %>
+</p>
+
+<p>
+  <strong>Receiver:</strong>
+  <%= @kudo.receiver %>
+</p>
+
+<%= link_to 'Edit', edit_kudo_path(@kudo) %> |
+<%= link_to 'Back', kudos_path %>

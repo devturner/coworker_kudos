@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_22_181147) do
+ActiveRecord::Schema.define(version: 2019_01_22_181700) do
+
+  create_table "kudos", force: :cascade do |t|
+    t.string "message"
+    t.integer "sender_id"
+    t.integer "receiver_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["receiver_id"], name: "index_kudos_on_receiver_id"
+    t.index ["sender_id"], name: "index_kudos_on_sender_id"
+  end
 
   create_table "organizations", force: :cascade do |t|
     t.string "name"
