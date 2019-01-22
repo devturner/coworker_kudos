@@ -10,8 +10,17 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <div id="container">
+      <div id="user_nav">
+        <% if user_signed_in? %>
+          <% if current_user.organization_id.present? %>
+            <%= current_user.email %> | <%= Organization.find(current_user.organization_id).name %> |
+            <% else %>
+              <%= current_user.email %> | <%= link_to 'Join or Create an Org', organizations_path %>|
+            <% end %>
+            <%= link_to "Sign Out", destroy_user_session_path %>
+          <% else%>      
+        <% end %>
     <%= yield %>
   </body>
 </html>
