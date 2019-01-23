@@ -4,4 +4,7 @@ class Kudo < ApplicationRecord
 
   belongs_to    :receiver, 
                 class_name: "User"
+
+  validates :message, presence: true
+
 end

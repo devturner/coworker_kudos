@@ -15,23 +15,26 @@
         <nav class="navbar navbar-expand-md navbar-default bg-light fixed-top">
             <li class="navbar-brand" href="#"><%= link_to 'Kudos', kudos_path %> </li>
           
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <div class="navbar-nav ml-auto">
               <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
-                  <% if current_user.organization_id.present? %>
-                      User: <%= current_user.email %> | Team: <%= link_to Organization.find(current_user.organization_id).name, organizations_path %> | 
-                  <% else %>
-                      <li class="nav-item active"> <%= current_user.email %> | <%= link_to 'Join or Create an Org', organizations_path %> | </li>
+                  <% if user_signed_in? %>
+                    <% if current_user.organization_id.present? %>
+                      <li class="nav-item active"> User: <%= current_user.email %>&nbsp;|&nbsp;Team: <%= link_to Organization.find(current_user.organization_id).name, organizations_path %>&nbsp;|&nbsp;</li>
+                      <% else %>
+                        <li class="nav-item active"> <%= current_user.email %> | <%= link_to 'Join or Create an Org', organizations_path %>&nbsp;|&nbsp;</li>
+                    <% end %>
+                      <li class="nav-item active"> <%= link_to " Sign Out", destroy_user_session_path %>  </li>
                   <% end %>
-                      <li class="nav-item active"> <%= link_to "Sign Out", destroy_user_session_path %>  </li>
-                  </li>
               </ul>
             </div>
           </nav>
 
-        <div class="container">
-            <%= yield %>
-        </div>
+        <main role="main" class="container">
+            <div>
+                <%= yield %>
+            </div>
+        </main>
 
   </body>
 </html>

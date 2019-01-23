@@ -1,41 +1,40 @@
 <p id="notice"><%= notice %></p>
+<div class="starter-template">
+  <% @kudos_left = 3 - current_user.sender.where(created_at: Date.today.beginning_of_week...Date.today.end_of_week).count %>
+  <% if !current_user.organization_id.present? %> 
+    <h6> Join or create an organization above</h6>
+    <% elsif @kudos_left > 0 && current_user.organization_id.present? %>
+      <%= link_to 'Send a Kudos', new_kudo_path, class: "btn btn-outline-success my-2 my-sm-0"%>
+      <p> <h6> <%= @kudos_left %> Kudos left to give! </h6>
+    <% else %> 
+      <p> <h6> Kudos reload weekly! </h6>
+  <% end %>
+</div>
 
-<h1>Kudos</h1> 
+  <div class="centered">
+    <% if current_user.receiver.count > 0 %>
+    <table class="kudos" style="width:450px;">
+      <thead>
+        <tr>
+          <th>Kudos to you:</th>
+          <th>From:</th>
+        </tr>
+      </thead>
 
-<% @kudos_left = 3 - current_user.sender.where(created_at: Date.today.beginning_of_week...Date.today.end_of_week).count %>
-<% if !current_user.organization_id.present? %> 
-  <h3> Join or create an organization above</h3>
-  <% elsif @kudos_left > 0 && current_user.organization_id.present? %>
-    <h3> <%= @kudos_left %> Kudos left to give </h3>
-    <%= link_to 'Send a Kudos', new_kudo_path %>
-  <% else %> 
-    <h3> Kudos reload weekly! </h3>
-<% end %>
-
-
-<% if current_user.receiver.count > 0 %>
-<table class="kudos" style="width:550px;">
-  <thead>
-    <tr>
-      <th style="text-align: left">Kudos to you:</th>
-      <th style="text-align: left">From:</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% current_user.receiver.reverse_order.each  do |kudo| %>
-      <tr>
-        <td><%= kudo.message %></td>
-        <% @sender = User.find(kudo.sender.id) %>
-        <td> <%= @sender.full_name %>
-      </tr>
+      <tbody>
+        <% current_user.receiver.reverse_order.each  do |kudo| %>
+          <tr>
+            <td><%= kudo.message %></td>
+            <% @sender = User.find(kudo.sender.id) %>
+            <td> <%= @sender.full_name %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% else %> 
+      <h6> Still awaiting your first kudo, get out there and help a teammate! </h6>
     <% end %>
-  </tbody>
-</table>
-<% else %> 
-  <h4> Still awaiting your first kudo, get out there and help a teammate! </h4>
-<% end %>
+  </div>
 
 <br>
-
 
