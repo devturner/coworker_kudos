@@ -1,6 +1,6 @@
 class KudosController < ApplicationController
-  before_action :set_kudo, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_kudo, :require_login, only: [:show, :edit, :update, :destroy]
+  
   # GET /kudos
   # GET /kudos.json
   def index
@@ -71,4 +71,11 @@ class KudosController < ApplicationController
     def kudo_params
       params.require(:kudo).permit(:message, :sender_id, :receiver_id)
     end
+
+    def require_login
+      unless current_user
+        redirect_to login_url
+      end
+    end
+  
 end

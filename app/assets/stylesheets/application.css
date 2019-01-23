@@ -13,3 +13,23 @@
  *= require_tree .
  *= require_self
  */
+
+ body {
+    padding-top: 5rem;
+    background-color: #f9fdff;
+  }
+
+  .starter-template {
+    padding: 1rem 1.5rem;
+    text-align: center;
+  }
+
+  div.centered {
+    padding-top: 3rem;
+    text-align: center;
+  }
+
+  div.centered table {
+    margin: 0 auto; 
+    text-align: left;
+  }

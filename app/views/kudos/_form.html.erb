@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :message %>
-    <%= form.text_field :message %>
+    <%= form.text_area :message %>
   </div>
 
   <div class="field">
@@ -22,6 +22,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-outline-success my-2 my-sm-0" %>
   </div>
 <% end %>
