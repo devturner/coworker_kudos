@@ -1,24 +1,22 @@
-# README
+# Coworker Kudos
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Author**: Chris Turner
 
-Things you may want to cover:
+**Version**: 0.1.0 
 
-* Ruby version
+**Ruby version**: ruby-2.6.0
 
-* System dependencies
+**System dependencies**: Devise gem
 
-* Configuration
+## Overview
+A Rails application where users can give "kudos" to other users in their organization. Every week (Monday at midnight), each user receives three kudos to give to other users within their organization. 
 
-* Database creation
+Users can create and join or need to join an already established organization before they can send a kudos. 
 
-* Database initialization
+Users cannot send kudos to themselves. 
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
 
-* ...
+
+
